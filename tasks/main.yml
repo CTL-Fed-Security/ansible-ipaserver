@@ -29,7 +29,7 @@
     --domain {{ ipaserver_domain }}
     -a {{ ipaserver_admin_password }}
     -p {{ ipaserver_dir_admin_password }}
-    --hostname={{ ansible_fqdn }}
+    --hostname={{ ipaserver_hostname }}
     --ip-address={{ ansible_eth0.ipv4.address }}
     {{ '--idstart=%s' % ipaserver_idstart if ipaserver_idstart | default(False) else '' }}
     {{ '--idmax=%s' % ipaserver_idmax if ipaserver_idmax | default(False) else '' }}
