@@ -5,6 +5,7 @@ ipaserver_dns_forwarder: 8.8.8.8
 ipaserver_domain: example.com
 ipaserver_hbac_allow: True
 ipaserver_hostname: "{{ ansible_fqdn }}"
+ipaserver_ip_address: "{{ ansible_eth0.ipv4.address }}"
 ipaserver_idstart: 5000
 ipaserver_idmax: False
 ipaserver_mkhomedir: True
