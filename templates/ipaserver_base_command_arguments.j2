@@ -10,7 +10,7 @@
 {{ '--setup-dns' if ipaserver_setup_dns | default(True) else '' }}
 {% if ipaserver_dns_forwarders is defined %}
 {% for server in ipaserver_dns_forwarders %}
---forwarder=server
+--forwarder={{ server }}
 {% endfor %}
 {% else %}
 --no-forwarders
