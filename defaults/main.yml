@@ -3,6 +3,7 @@ ipaserver_configure_ssh: True
 ipaserver_configure_sshd: True
 ipaserver_dns_forwarders:
   - 8.8.8.8
+  - 8.8.4.4
 ipaserver_domain: example.com
 ipaserver_hbac_allow: True
 ipaserver_hostname: "{{ ansible_fqdn }}"
