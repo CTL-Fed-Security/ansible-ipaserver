@@ -8,7 +8,7 @@
 {{ '--idmax=%s' % ipaserver_idmax if ipaserver_idmax | default(False) else '' }}
 {{ '--mkhomedir' if ipaserver_mkhomedir | default(True) else '' }}
 {{ '--setup-dns' if ipaserver_setup_dns | default(True) else '' }}
-{% if ipaserver_dns_forwarders is defined %}
+{% if ipaserver_dns_forwarders %}
 {% for server in ipaserver_dns_forwarders %}
 --forwarder={{ server }}
 {% endfor %}
