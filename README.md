@@ -11,7 +11,7 @@ Primarily tested and functional on Fedora, but open to others.
 Role Variables
 --------------
 
-There are 2 main variables that need to be provided external to the role that have no default. 
+There are 2 main variables that need to be provided external to the role that have no default.
 
     ipaserver_admin_password
     ipaserver_dir_admin_password
@@ -21,7 +21,9 @@ The following variables are used by this role and values are defined in defaults
     ipaserver_base_command:     ipa-server-install -U
     ipaserver_configure_ssh: True
     ipaserver_configure_sshd: True
-    ipaserver_dns_forwarder: 8.8.8.8
+    ipaserver_dns_forwarders:
+     - 8.8.8.8
+     - 8.8.4.4
     ipaserver_domain: example.com       # All lowercase. Actual DNS domain.
     ipaserver_hbac_allow: True
     ipaserver_idstart: 5000
