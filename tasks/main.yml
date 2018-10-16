@@ -4,23 +4,17 @@
 
 - name: Add host entry
   lineinfile:
-    dest=/etc/hosts
-    regexp=" {{ ansible_hostname }} "
-    line="{{ ansible_default_ipv4.address }} {{ ansible_fqdn }}"
-    owner=root
-    group=root
-    mode=0644
+    dest: /etc/hosts
+    regexp: " {{ ansible_hostname }} "
+    line: "{{ ansible_default_ipv4.address }} {{ ansible_fqdn }}"
+    owner: root
+    group: root
+    mode: 0644
 
 - name: Ensure software is installed (yum)
-  yum: name={{ item }} state=present
-  with_items: "{{ ipaserver_packages }}"
-  when: ansible_distribution == "CentOS" or
-        (ansible_distribution == "Fedora" and ansible_distribution_version|int <= 21)
-
-- name: Ensure software is installed (dnf)
-  dnf: name={{ item }} state=present
-  with_items: "{{ ipaserver_packages }}"
-  when: ansible_distribution == "Fedora" and ansible_distribution_version|int > 21
+  package: 
+    name: "{{ ipaserver_packages }}" 
+    state: present
 
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"

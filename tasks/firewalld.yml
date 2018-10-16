@@ -1,21 +1,32 @@
 ---
 #firewalld doesn't exist on AWS CentOS 7 by default
 - name: Make sure firewalld is installed
-  yum: name=firewalld state=present
+  yum: 
+    name: firewalld 
+    state: present
   when: ansible_os_family == "RedHat"
 
 #The firewalld ruleset configuration will fail
 #unless we start firewalld
 - name: Enable and start firewalld
-  service: name=firewalld state=started enabled=yes
+  service: 
+    name: firewalld 
+    state: started 
+    enabled: yes
   
 - name: Enable the LDAPS firewalld ruleset provided by freeipa
-  firewalld: service=freeipa-ldaps permanent=true state=enabled
+  firewalld: 
+    service: freeipa-ldaps 
+    permanent: true 
+    state: enabled
   notify: reload firewalld
   when: ansible_distribution == "Fedora"
 
 - name: Enable the individual rulesets for CentOS
-  firewalld: service={{ item }} permanent=true state=enabled
+  firewalld: 
+    service: {{ item }} 
+    permanent: true 
+    state: enabled
   with_items:
     - https
     - ldaps
