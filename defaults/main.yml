@@ -22,3 +22,11 @@ ipaserver_setup_ntp: True
 ipaserver_ssh_trust_dns: True
 ipaserver_ui_redirect: True
 ipaserver_manage_firewalld: True
+
+firewalld_rulesets:
+  - https
+  - ldaps
+  - kerberos
+  - kpasswd
+  - dns
+  - ntp
