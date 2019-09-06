@@ -23,7 +23,7 @@ ipaserver_ssh_trust_dns: True
 ipaserver_ui_redirect: True
 ipaserver_manage_firewalld: True
 
-firewalld_rulesets:
+ipaserver_firewalld_rulesets:
   - https
   - ldaps
   - kerberos

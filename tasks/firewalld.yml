@@ -24,8 +24,9 @@
 
 - name: Enable the individual rulesets for CentOS
   firewalld: 
-    service: "{{ firewalld_rulesets }}"
+    service: "{{ item }}"
     permanent: true 
     state: enabled
+  with_items: "{{ ipaserver_firewalld_rulesets }}"
   notify: reload firewalld
   when: ansible_distribution != "Fedora" and ansible_os_family == "RedHat"
