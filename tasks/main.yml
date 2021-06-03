@@ -19,7 +19,7 @@
   
 - name: Ensure software is installed (dnf)
   package: 
-    name: "{{ ipaserver_packages }}
+    name: "{{ ipaserver_packages }}"
     state: present
   when: (ansible_distribution == "CentOS" and ansible_distribution_version|int = 8)
 
