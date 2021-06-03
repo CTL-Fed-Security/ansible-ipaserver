@@ -15,6 +15,12 @@
   package: 
     name: "{{ ipaserver_packages }}" 
     state: present
+  when: ansible_distribution == "CentOS" and ansible_distribution_version|int = 7)
+  
+- name: Ensure software is installed (dnf)
+  package: 
+    name="{{ ipaserver_packages }}
+  when: ansible_distribution == "CentOS" and ansible_distribution_version|int = 8)
 
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"
