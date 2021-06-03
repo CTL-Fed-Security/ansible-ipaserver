@@ -10,18 +10,25 @@
     owner: root
     group: root
     mode: 0644
+    
+- name: Enable FreeIPA Repo
+  dnf:
+    name: '@idm:DL1'
+    state: present
+  when: 
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "8"
 
+- name: Sync the Repo
+  command: "dnf distro-sync"
+  when: 
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "8"
+    
 - name: Ensure software is installed (yum)
   package: 
     name: "{{ ipaserver_packages }}" 
     state: present
-  when: (ansible_distribution == "CentOS" and ansible_distribution_version|int = 7)
-  
-- name: Ensure software is installed (dnf)
-  package: 
-    name: "{{ ipaserver_packages }}"
-    state: present
-  when: (ansible_distribution == "CentOS" and ansible_distribution_version|int = 8)
 
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"
