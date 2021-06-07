@@ -23,6 +23,11 @@
   package: 
     name: "{{ ipaserver_packages }}" 
     state: present
+ 
+- name: Add Allow Recursive Rule
+  lineinfile:
+    path: /etc/named/ipa-options-ext.conf
+    line: allow-recursion { any; };
 
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"
