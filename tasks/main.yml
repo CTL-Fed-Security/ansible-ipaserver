@@ -29,23 +29,5 @@
   args:
     creates: /etc/ipa/default.conf
     
-- name: Add Allow Recursive Rule
-  lineinfile:
-    path: /etc/named/ipa-options-ext.conf
-    line: allow-recursion { any; };
-  when: 
-    - ansible_distribution == "CentOS"
-    - ansible_distribution_major_version == "8"
-    
-- name: Add DNS server entry in zzz-ipa.conf file
-  lineinfile:
-    dest: /etc/NetworkManager/conf.d/zzz-ipa.conf
-    regexp: '^servers'
-    line: "servers={{ hostvars[(groups['freeipa'] | sort)[0]]['ansible_host'] }},{{ hostvars[(groups['freeipa'] | sort)[1]]['ansible_host'] }}"
-  notify: restart NetworkManager
-  when: 
-    - ansible_distribution == "CentOS"
-    - ansible_distribution_major_version == "8"
-
 - include: firewalld.yml
   when: ipaserver_manage_firewalld
