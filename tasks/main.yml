@@ -39,7 +39,7 @@
     
 - name: Add DNS server entry in zzz-ipa.conf file
   lineinfile:
-    dest: /etc/hosts
+    dest: /etc/NetworkManager/conf.d/zzz-ipa.conf
     regexp: '^servers'
     line: "servers={{ hostvars[(groups['freeipa'] | sort)[0]]['ansible_host'] }},{{ hostvars[(groups['freeipa'] | sort)[1]]['ansible_host'] }}"
   notify: restart NetworkManager
