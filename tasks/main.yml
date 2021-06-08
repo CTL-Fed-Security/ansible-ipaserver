@@ -24,15 +24,22 @@
     name: "{{ ipaserver_packages }}" 
     state: present
  
-- name: Add Allow Recursive Rule
-  lineinfile:
-    path: /etc/named/ipa-options-ext.conf
-    line: allow-recursion { any; };
-
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"
   args:
     creates: /etc/ipa/default.conf
+    
+- name: Add Allow Recursive Rule
+  lineinfile:
+    path: /etc/named/ipa-options-ext.conf
+    line: allow-recursion { any; };
+    
+- name: Add DNS server entry in zzz-ipa.conf file
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '^servers'
+    line: "servers={{ hostvars[(groups['freeipa'] | sort)[0]]['ansible_host'] }},{{ hostvars[(groups['freeipa'] | sort)[1]]['ansible_host'] }}"
+  notify: restart NetworkManager
 
 - include: firewalld.yml
   when: ipaserver_manage_firewalld
