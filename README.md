@@ -6,7 +6,9 @@ A simple, but fairly parameterized, role for setting up a FreeIPA server. Primar
 Requirements
 ------------
 
-Primarily tested and functional on Fedora, but open to others.
+- Primarily tested and functional on Fedora, but open to others.
+- CentOS 8
+- CentOS 7
 
 Role Variables
 --------------
