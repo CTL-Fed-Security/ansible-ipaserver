@@ -10,16 +10,24 @@
     owner: root
     group: root
     mode: 0644
-
+    
+- name: Enable FreeIPA Repo
+  dnf:
+    name: '@idm:DL1'
+    state: present
+  when: 
+    - ansible_distribution == "CentOS"
+    - ansible_distribution_major_version == "8"
+    
 - name: Ensure software is installed (yum)
   package: 
     name: "{{ ipaserver_packages }}" 
     state: present
-
+ 
 - name: Run the installer
   command: "{{ ipaserver_base_command }} {{ ipaserver_base_command_arguments }}"
   args:
     creates: /etc/ipa/default.conf
-
+    
 - include: firewalld.yml
   when: ipaserver_manage_firewalld
